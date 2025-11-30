@@ -1,0 +1,33 @@
+10:40:24 **** Incremental Build of configuration Debug for project test04828 ****
+make all 
+'Building file: ../src/helloworld.c'
+'Invoking: ARM v8 gcc compiler'
+aarch64-none-elf-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/helloworld.o" -ID:/Work/rfsoc_project/project_1/app/test/export/test/sw/test/standalone_domain/bspinclude/include -MMD -MP -MF"src/helloworld.d" -MT"src/helloworld.o" -o "src/helloworld.o" "../src/helloworld.c"
+In file included from ../src/helloworld.c:52:
+../src/ps_gpio.h: In function 'gpio_init':
+../src/ps_gpio.h:28:13: warning: variable 'Type_of_board' set but not used [-Wunused-but-set-variable]
+   28 |         int Type_of_board;
+      |             ^~~~~~~~~~~~~
+../src/ps_gpio.h:26:13: warning: variable 'Status' set but not used [-Wunused-but-set-variable]
+   26 |         int Status;
+      |             ^~~~~~
+../src/helloworld.c: In function 'mdelay':
+../src/helloworld.c:103:17: warning: implicit declaration of function 'usleep' [-Wimplicit-function-declaration]
+  103 |                 usleep(msecs * 1000);
+      |                 ^~~~~~
+'Finished building: ../src/helloworld.c'
+' '
+'Building target: test04828.elf'
+'Invoking: ARM v8 gcc linker'
+aarch64-none-elf-gcc -Wl,-T -Wl,../src/lscript.ld -LD:/Work/rfsoc_project/project_1/app/test/export/test/sw/test/standalone_domain/bsplib/lib -o "test04828.elf"  ./src/helloworld.o ./src/platform.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: test04828.elf'
+' '
+'Invoking: ARM v8 Print Size'
+aarch64-none-elf-size test04828.elf  |tee "test04828.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  38148	   2072	  20828	  61048	   ee78	test04828.elf
+'Finished building: test04828.elf.size'
+' '
+
+10:40:29 Build Finished (took 4s.557ms)
+

@@ -1,0 +1,16 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
+| Date         : Thu Jul  3 17:32:24 2025
+| Host         : XD_CHU running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xczu27dr-fsve1156-2-i
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_axi_spi_master_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of design_1_axi_spi_master_0_0 (vrhacker.com:user:axi_spi_master:1.0) from (Rev. 2) to (Rev. 3)
+

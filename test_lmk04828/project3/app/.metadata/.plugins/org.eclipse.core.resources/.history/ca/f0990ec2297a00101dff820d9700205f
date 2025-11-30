@@ -1,0 +1,442 @@
+/******************************************************************************
+*
+* Copyright (C) 2009 - 2014 Xilinx, Inc.  All rights reserved.
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* Use of the Software is limited solely to applications:
+* (a) running on a Xilinx device, or
+* (b) that interact with a Xilinx device through a bus or interconnect.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+* XILINX  BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
+* OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+* Except as contained in this notice, the name of the Xilinx shall not be used
+* in advertising or otherwise to promote the sale, use or other dealings in
+* this Software without prior written authorization from Xilinx.
+*
+******************************************************************************/
+
+/*
+ * helloworld.c: simple test application
+ *
+ * This application configures UART 16550 to baud rate 9600.
+ * PS7 UART (Zynq) is not initialized by this application, since
+ * bootrom/bsp configures it to baud rate 115200
+ *
+ * ------------------------------------------------
+ * | UART TYPE   BAUD RATE                        |
+ * ------------------------------------------------
+ *   uartns550   9600
+ *   uartlite    Configurable only in HW design
+ *   ps7_uart    115200 (configured by bootrom/bsp)
+ */
+
+#include <stdio.h>
+#include "platform.h"
+#include "xil_printf.h"
+
+#include "lmk04828_param.h"
+#include "ps_gpio.h"
+
+#include "xspips.h"		/* SPI device driver */
+
+#define SPI_DEVICE_ID		XPAR_XSPIPS_0_DEVICE_ID
+
+
+static XSpiPs SpiInstance;
+
+
+/******************************************************************************
+* Copyright (C) 2018 - 2021 Xilinx, Inc.  All rights reserved.
+* SPDX-License-Identifier: MIT
+******************************************************************************/
+
+/****************************************************************************/
+/**
+*
+* @file xrfdc_mts_example.c
+*
+* RFSoC MultiTile Sync Example test application
+*
+* This example calls the RFdc Multi-tile-sync (MTS) API with the
+* following configuration:
+* Tiles to Sync: DAC0, DAC1, ADC0, ADC1, ADC2, ADC3.
+*
+* MTS expects the PL clock, the AXI stream clock and the FS to all be
+* compatible for it to function correctly. More information surrounding this
+* can be found in PG269.
+* <pre>
+*
+* MODIFICATION HISTORY:
+*
+* Ver   Who    Date     Changes
+* ----- -----  -------- -----------------------------------------------------
+* 3.1   jm     01/24/18 First release
+* 5.0   sk     09/05/18 Rename XRFdc_MTS_RMW_DRP as XRFdc_ClrSetReg.
+* 5 0   mus    08/18/18 Updated to remove xparameters.h dependency for linux
+*                       platform.
+* 6.0   cog    02/21/19 Removed unnecessary register writes.
+*              02/21/19 Set frequency and sample rate to appropriate values
+*                       for MTS.
+*              02/21/19 Set metal log level to DEBUG.
+* 7.0   cog    07/25/19 Updated example for new metal register API.
+* 8.1   cog    08/28/20 Make the example toatally generic, updated information.
+* 10.0  cog    11/26/20 xrfdc_mts.h is now integrated to xrfdc.h.
+*       cog    03/08/21 MTS now scans reference tile first. This has required a
+*                       change to the prototype of XRFdc_MultiConverter_Init.
+*
+* </pre>
+*
+*****************************************************************************/
+
+/***************************** Include Files ********************************/
+
+#define __BAREMETAL__
+
+#ifdef __BAREMETAL__
+#include "xparameters.h"
+#endif
+#include "xrfdc.h"
+/************************** Constant Definitions ****************************/
+
+/*
+ * The following constants map to the XPAR parameters created in the
+ * xparameters.h file. They are defined here such that a user can easily
+ * change all the needed parameters in one place.
+ */
+#ifdef __BAREMETAL__
+#define RFDC_DEVICE_ID 	XPAR_XRFDC_0_DEVICE_ID
+#define I2CBUS	1
+#else
+#define RFDC_DEVICE_ID 	0
+#define I2CBUS	12
+#endif
+
+/**************************** Type Definitions ******************************/
+
+
+/***************** Macros (Inline Functions) Definitions ********************/
+#ifdef __BAREMETAL__
+#define printf xil_printf
+#endif
+/************************** Function Prototypes *****************************/
+
+int RFdcMTS_Example(u16 RFdcDeviceId);
+
+/************************** Variable Definitions ****************************/
+
+static XRFdc RFdcInst;      /* RFdc driver instance */
+/****************************************************************************/
+/**
+*
+* Main function that invokes the MTS example in this file.
+*
+* @param	None.
+*
+* @return
+*		- XRFDC_SUCCESS if the example has completed successfully.
+*		- XRFDC_FAILURE if the example has failed.
+*
+* @note		None.
+*
+*****************************************************************************/
+
+
+#define ADC_BASE_ADDR 0X80040000
+
+
+void mdelay(uint32_t msecs);
+int lmk04828_init();
+
+int SpiPsEepromPolledExample(XSpiPs *SpiInstancePtr, u16 SpiDeviceId);
+
+
+int main()
+{
+    init_platform();
+
+    int	spi_status = 0;
+
+    int	Status;
+
+    u32 read_data = 0;
+
+    print("Hello World\n\r");
+    print("Successfully ran Hello World application");
+    cleanup_platform();
+
+
+    spi_status = SpiPsEepromPolledExample(&SpiInstance, SPI_DEVICE_ID);
+
+    //reset LMK04828
+
+	gpio_init(GPIO_DEVICE_ID);
+	gpio_out(LMK_RESET_Pin, 1);
+	mdelay(500);
+	gpio_out(LMK_REF_SEL0_Pin, 0);
+	gpio_out(LMK_REF_SEL1_Pin, 0);
+	gpio_out(LMK_SYNC_Pin, 0);
+
+	mdelay(1);
+
+	lmk04828_init();
+
+
+	read_data = Xil_In32(ADC_BASE_ADDR+0);
+	printf("Read data = %x\r\n", read_data);
+
+	Xil_Out32(ADC_BASE_ADDR+4, 1);
+
+	mdelay(1000);
+
+	u32 status_adc = 0;
+
+	//Xil_Out32(ADC_BASE_ADDR+0x14000+0x4, 1);
+
+	mdelay(1000);
+
+	status_adc = Xil_In32(ADC_BASE_ADDR+0x14000+0x38);
+	mdelay(100);
+	printf("Read data for CLK Detector = %x\r\n", status_adc);
+
+	//while(1){
+		status_adc = Xil_In32(ADC_BASE_ADDR+0x18000+0xc);
+		mdelay(100);
+		printf("Read data for status adc = %x\r\n", status_adc);
+	//}
+
+//	printf("RFdc MTS Example Test\r\n");
+//	/*
+//	 * Specify the Device ID that is generated in xparameters.h.
+//	 */
+//	Status = RFdcMTS_Example(RFDC_DEVICE_ID);
+//	if (Status != XRFDC_SUCCESS) {
+//		printf("MTS Example Test failed\r\n");
+//		return XRFDC_FAILURE;
+//	}
+//
+//	printf("Successfully ran MTS Example\r\n");
+
+
+    return XST_SUCCESS;
+}
+
+
+int lmk04828_init(){
+
+	u16			reg_addr	 = 0;
+	u8			reg_data	 = 0;
+
+	u8 			rd_data		 = 0;
+
+	int			size_dat = ARRAY_SIZE(lmk04828_init_data_245p76);
+
+	for(int ii = 0; ii < ARRAY_SIZE(lmk04828_init_data_245p76); ii++){
+		reg_addr = lmk04828_init_data_245p76[ii] >> 8;
+		reg_data = lmk04828_init_data_245p76[ii] & 0xff;
+		spi_wr_reg(reg_addr, reg_data);
+		mdelay(10);
+	}
+
+	mdelay(10);
+
+//	while(1){
+//		rd_data = spi_rd_reg(0x183);
+//	}
+
+	return XST_SUCCESS;
+}
+
+
+void mdelay(uint32_t msecs)
+{
+	usleep(msecs * 1000);
+}
+
+
+
+
+
+/****************************************************************************/
+/**
+*
+* This function runs a MTS test on the RFSoC data converter device using the
+* driver APIs.
+* This function does the following tasks:
+*	- Initialize the RFdc device driver instance
+*	- Test MTS feature.
+*
+* @param	RFdcDeviceId is the XPAR_<XRFDC_instance>_DEVICE_ID value
+*		from xparameters.h.
+*
+* @return
+*		- XRFDC_SUCCESS if the example has completed successfully.
+*		- XRFDC_FAILURE if the example has failed.
+*
+* @note   	None
+*
+****************************************************************************/
+int RFdcMTS_Example(u16 RFdcDeviceId)
+{
+	int status, status_adc, status_dac, i;
+	u32 factor;
+	XRFdc_Config *ConfigPtr;
+	XRFdc *RFdcInstPtr = &RFdcInst;
+#ifndef __BAREMETAL__
+	struct metal_device *deviceptr;
+#endif
+
+	struct metal_init_params init_param = METAL_INIT_DEFAULTS;
+
+	if (metal_init(&init_param)) {
+		printf("ERROR: Failed to run metal initialization\n");
+		return XRFDC_FAILURE;
+	}
+	metal_set_log_level(METAL_LOG_DEBUG);
+    ConfigPtr = XRFdc_LookupConfig(RFdcDeviceId);
+    if (ConfigPtr == NULL) {
+		return XRFDC_FAILURE;
+	}
+
+#ifndef __BAREMETAL__
+	status = XRFdc_RegisterMetal(RFdcInstPtr, RFdcDeviceId, &deviceptr);
+	if (status != XRFDC_SUCCESS) {
+		return XRFDC_FAILURE;
+	}
+#endif
+
+    status = XRFdc_CfgInitialize(RFdcInstPtr, ConfigPtr);
+    if (status != XRFDC_SUCCESS) {
+        printf("RFdc Init Failure\n\r");
+    }
+
+    printf("=== RFdc Initialized - Running Multi-tile Sync ===\n");
+
+    /* ADC MTS Settings */
+    XRFdc_MultiConverter_Sync_Config ADC_Sync_Config;
+
+    /* DAC MTS Settings */
+    XRFdc_MultiConverter_Sync_Config DAC_Sync_Config;
+
+
+    /* Run MTS for the ADC & DAC */
+    //printf("\n=== Run DAC Sync ===\n");
+
+
+    /* Initialize DAC MTS Settings */
+    //XRFdc_MultiConverter_Init (&DAC_Sync_Config, 0, 0, XRFDC_TILE_ID0);
+    //DAC_Sync_Config.Tiles = 0x3;	/* Sync DAC tiles 0 and 1 */
+
+    //status_dac = XRFdc_MultiConverter_Sync(RFdcInstPtr, XRFDC_DAC_TILE,
+	//				&DAC_Sync_Config);
+    //if(status_dac == XRFDC_MTS_OK){
+	//printf("INFO : DAC Multi-Tile-Sync completed successfully\n");
+    //}else{
+	//printf("ERROR : DAC Multi-Tile-Sync did not complete successfully. Error code is %u \n",status_dac);
+	//return status_dac;
+    //}
+
+    printf("\n=== Run ADC Sync ===\n");
+
+    /* Initialize ADC MTS Settings */
+    XRFdc_MultiConverter_Init (&ADC_Sync_Config, 0, 0, XRFDC_TILE_ID0);
+    ADC_Sync_Config.Tiles = 0x1;	/* Sync ADC tiles 0, 1, 2, 3 */
+
+    status_adc = XRFdc_MultiConverter_Sync(RFdcInstPtr, XRFDC_ADC_TILE,
+					&ADC_Sync_Config);
+    if(status_adc == XRFDC_MTS_OK){
+	printf("INFO : ADC Multi-Tile-Sync completed successfully\n");
+    }else{
+		printf("ERROR : ADC Multi-Tile-Sync did not complete successfully. Error code is %u \n",status_adc);
+		return status_adc;
+    }
+
+    /*
+     * Report Overall Latency in T1 (Sample Clocks) and
+     * Offsets (in terms of PL words) added to each FIFO
+     */
+     printf("\n\n=== Multi-Tile Sync Report ===\n");
+//     for(i=0; i<4; i++) {
+//         if((1<<i)&DAC_Sync_Config.Tiles) {
+//                 XRFdc_GetInterpolationFactor(RFdcInstPtr, i, 0, &factor);
+//                 printf("DAC%d: Latency(T1) =%3d, Adjusted Delay"
+//				 "Offset(T%d) =%3d\n", i, DAC_Sync_Config.Latency[i],
+//						 factor, DAC_Sync_Config.Offset[i]);
+//         }
+//     }
+     for(i=0; i<4; i++) {
+         if((1<<i)&ADC_Sync_Config.Tiles) {
+                 XRFdc_GetDecimationFactor(RFdcInstPtr, i, 0, &factor);
+                 printf("ADC%d: Latency(T1) =%3d, Adjusted Delay"
+				 "Offset(T%d) =%3d\n", i, ADC_Sync_Config.Latency[i],
+						 factor, ADC_Sync_Config.Offset[i]);
+         }
+     }
+
+    return XRFDC_MTS_OK;
+}
+
+
+
+int SpiPsEepromPolledExample(XSpiPs *SpiInstancePtr, u16 SpiDeviceId)
+{
+	int Status;
+	u8 *BufferPtr;
+	u8 UniqueValue;
+	int Count;
+	int Page;
+	XSpiPs_Config *SpiConfig;
+
+	/*
+	 * Initialize the SPI driver so that it's ready to use
+	 */
+	SpiConfig = XSpiPs_LookupConfig(SpiDeviceId);
+	if (NULL == SpiConfig) {
+		return XST_FAILURE;
+	}
+
+	Status = XSpiPs_CfgInitialize(SpiInstancePtr, SpiConfig,
+				       SpiConfig->BaseAddress);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	/*
+	 * Perform a self-test to check hardware build
+	 */
+	Status = XSpiPs_SelfTest(SpiInstancePtr);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	/*
+	 * Set the Spi device as a master. External loopback is required.
+	 */
+	XSpiPs_SetOptions(SpiInstancePtr, XSPIPS_MASTER_OPTION |
+			   XSPIPS_FORCE_SSELECT_OPTION);
+
+	XSpiPs_SetClkPrescaler(SpiInstancePtr, XSPIPS_CLK_PRESCALE_64);
+
+	XSpiPs_Enable(&SpiInstancePtr);
+
+	return XST_SUCCESS;
+}
+
+
+
+
+

@@ -1,0 +1,23 @@
+Determining if files xintc.h exist failed with the following output:
+Change Dir: D:/Work/rfsoc_project/project3/app/test/zynqmp_pmufw/zynqmp_pmufw_bsp/psu_pmu_0/libsrc/libmetal_v2_4/build_libmetal/CMakeFiles/CMakeTmp
+
+Run Build Command:"D:/Software/Vitis2022/Vitis/2022.2/gnuwin/bin/make.exe" "cmTC_27627/fast"
+D:/Software/Vitis2022/Vitis/2022.2/gnuwin/bin/make.exe -f CMakeFiles/cmTC_27627.dir/build.make CMakeFiles/cmTC_27627.dir/build
+make.exe[1]: Entering directory 'D:/Work/rfsoc_project/project3/app/test/zynqmp_pmufw/zynqmp_pmufw_bsp/psu_pmu_0/libsrc/libmetal_v2_4/build_libmetal/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_27627.dir/CheckIncludeFiles.c.obj
+D:/Software/Vitis2022/Vitis/2022.2/gnu/microblaze/nt/bin/mb-gcc.exe   -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mxl-soft-mul -mcpu=v9.2  -mlittle-endian -g -ffunction-sections -fdata-sections -Wall -Wextra -fno-tree-loop-distribute-patterns  -Os -flto -ffat-lto-objects -ID:/Work/rfsoc_project/project3/app/test/zynqmp_pmufw/zynqmp_pmufw_bsp/psu_pmu_0/include -c   -o CMakeFiles/cmTC_27627.dir/CheckIncludeFiles.c.obj   -c D:/Work/rfsoc_project/project3/app/test/zynqmp_pmufw/zynqmp_pmufw_bsp/psu_pmu_0/libsrc/libmetal_v2_4/build_libmetal/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+D:/Work/rfsoc_project/project3/app/test/zynqmp_pmufw/zynqmp_pmufw_bsp/psu_pmu_0/libsrc/libmetal_v2_4/build_libmetal/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:2:10: fatal error: xintc.h: No such file or directory
+    2 | #include <xintc.h>
+      |          ^~~~~~~~~
+compilation terminated.
+make.exe[1]: *** [CMakeFiles/cmTC_27627.dir/build.make:66: CMakeFiles/cmTC_27627.dir/CheckIncludeFiles.c.obj] Error 1
+make.exe[1]: Leaving directory 'D:/Work/rfsoc_project/project3/app/test/zynqmp_pmufw/zynqmp_pmufw_bsp/psu_pmu_0/libsrc/libmetal_v2_4/build_libmetal/CMakeFiles/CMakeTmp'
+make.exe: *** [Makefile:126: cmTC_27627/fast] Error 2
+
+Source:
+/* */
+#include <xintc.h>
+
+
+int main(void){return 0;}
+

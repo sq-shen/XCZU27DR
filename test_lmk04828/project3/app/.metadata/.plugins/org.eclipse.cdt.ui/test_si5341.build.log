@@ -1,0 +1,52 @@
+16:42:40 **** Build of configuration Debug for project test_si5341 ****
+make all 
+'Building file: ../src/axi_spi.c'
+'Invoking: ARM v8 gcc compiler'
+aarch64-none-elf-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/axi_spi.o" -D __BAREMETAL__ -ID:/Work/rfsoc_project/project_1/app/test/export/test/sw/test/standalone_domain/bspinclude/include -MMD -MP -MF"src/axi_spi.d" -MT"src/axi_spi.o" -o "src/axi_spi.o" "../src/axi_spi.c"
+'Finished building: ../src/axi_spi.c'
+' '
+'Building file: ../src/test_si5341.c'
+'Invoking: ARM v8 gcc compiler'
+aarch64-none-elf-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/test_si5341.o" -D __BAREMETAL__ -ID:/Work/rfsoc_project/project_1/app/test/export/test/sw/test/standalone_domain/bspinclude/include -MMD -MP -MF"src/test_si5341.d" -MT"src/test_si5341.o" -o "src/test_si5341.o" "../src/test_si5341.c"
+In file included from ../src/test_si5341.c:7:
+../src/ps_gpio.h: In function 'gpio_init':
+../src/ps_gpio.h:28:13: warning: variable 'Type_of_board' set but not used [-Wunused-but-set-variable]
+   28 |         int Type_of_board;
+      |             ^~~~~~~~~~~~~
+../src/ps_gpio.h:26:13: warning: variable 'Status' set but not used [-Wunused-but-set-variable]
+   26 |         int Status;
+      |             ^~~~~~
+../src/test_si5341.c: In function 'main':
+../src/test_si5341.c:96:9: warning: implicit declaration of function 'mdelay' [-Wimplicit-function-declaration]
+   96 |         mdelay(500);
+      |         ^~~~~~
+../src/test_si5341.c:50:12: warning: variable 'data' set but not used [-Wunused-but-set-variable]
+   50 |         u8 data;
+      |            ^~~~
+../src/test_si5341.c: At top level:
+../src/test_si5341.c:291:14: warning: conflicting types for 'mdelay'; have 'void(uint32_t)' {aka 'void(unsigned int)'}
+  291 |         void mdelay(uint32_t msecs)
+      |              ^~~~~~
+../src/test_si5341.c:96:9: note: previous implicit declaration of 'mdelay' with type 'void(uint32_t)' {aka 'void(unsigned int)'}
+   96 |         mdelay(500);
+      |         ^~~~~~
+../src/test_si5341.c: In function 'mdelay':
+../src/test_si5341.c:293:17: warning: implicit declaration of function 'usleep' [-Wimplicit-function-declaration]
+  293 |                 usleep(msecs * 1000);
+      |                 ^~~~~~
+'Finished building: ../src/test_si5341.c'
+' '
+'Building target: test_si5341.elf'
+'Invoking: ARM v8 gcc linker'
+aarch64-none-elf-gcc -Wl,-T -Wl,../src/lscript.ld -LD:/Work/rfsoc_project/project_1/app/test/export/test/sw/test/standalone_domain/bsplib/lib -o "test_si5341.elf"  ./src/axi_spi.o ./src/test_si5341.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-lgcc,-lc,-lmetal,--end-group
+'Finished building target: test_si5341.elf'
+' '
+'Invoking: ARM v8 Print Size'
+aarch64-none-elf-size test_si5341.elf  |tee "test_si5341.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  49164	   2096	  20860	  72120	  119b8	test_si5341.elf
+'Finished building: test_si5341.elf.size'
+' '
+
+16:42:48 Build Finished (took 8s.316ms)
+

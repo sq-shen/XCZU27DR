@@ -1,0 +1,10 @@
+15:53:03 **** Incremental Build of configuration Debug for project test_uart_system ****
+make all 
+Generating bif file for the system project
+generate_system_bif.bat 49789 D:/Work/rfsoc_project/project_1/app/test/export/test/test.xpfm standalone_domain D:/Work/rfsoc_project/project_1/app/test_uart_system/Debug/system.bif
+sdcard_gen --xpfm D:/Work/rfsoc_project/project_1/app/test/export/test/test.xpfm --sys_config test --bif D:/Work/rfsoc_project/project_1/app/test_uart_system/Debug/system.bif --bitstream D:/Work/rfsoc_project/project_1/app/test_uart/_ide/bitstream/design_1_wrapper.bit --elf D:/Work/rfsoc_project/project_1/app/test_uart/Debug/test_uart.elf,psu_cortexa53_0
+creating BOOT.BIN using D:/Work/rfsoc_project/project_1/app/test_uart/_ide/bitstream/design_1_wrapper.bit
+Running D:/Software/Vitis2022/Vitis/2022.2/bin/bootgen -arch zynqmp -image D:/Work/rfsoc_project/project_1/app/test_uart_system/Debug/sd_card_temp/boot.bif -w -o i BOOT.BIN
+
+15:53:25 Build Finished (took 22s.250ms)
+

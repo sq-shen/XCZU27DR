@@ -1,0 +1,60 @@
+Nothing to build in platform 'test'
+
+07:04:51 **** Incremental Build of configuration Debug for project test_lmk04828 ****
+make all 
+'Building file: ../src/helloworld.c'
+'Invoking: ARM v8 gcc compiler'
+aarch64-none-elf-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/helloworld.o" -D __BAREMETAL__ -ID:/Work/rfsoc_project/project3/app/test/export/test/sw/test/standalone_domain/bspinclude/include -MMD -MP -MF"src/helloworld.d" -MT"src/helloworld.o" -o "src/helloworld.o" "../src/helloworld.c"
+In file included from ../src/helloworld.c:53:
+../src/ps_gpio.h: In function 'gpio_init':
+../src/ps_gpio.h:28:13: warning: variable 'Type_of_board' set but not used [-Wunused-but-set-variable]
+   28 |         int Type_of_board;
+      |             ^~~~~~~~~~~~~
+../src/ps_gpio.h:26:13: warning: variable 'Status' set but not used [-Wunused-but-set-variable]
+   26 |         int Status;
+      |             ^~~~~~
+../src/helloworld.c: At top level:
+../src/helloworld.c:108: warning: "__BAREMETAL__" redefined
+  108 | #define __BAREMETAL__
+      | 
+<command-line>: note: this is the location of the previous definition
+../src/helloworld.c: In function 'main':
+../src/helloworld.c:178:9: warning: unused variable 'Status' [-Wunused-variable]
+  178 |     int Status;
+      |         ^~~~~~
+../src/helloworld.c:176:9: warning: variable 'spi_status' set but not used [-Wunused-but-set-variable]
+  176 |     int spi_status = 0;
+      |         ^~~~~~~~~~
+../src/helloworld.c: In function 'RFdcMTS_Example':
+../src/helloworld.c:334:38: warning: unused variable 'DAC_Sync_Config' [-Wunused-variable]
+  334 |     XRFdc_MultiConverter_Sync_Config DAC_Sync_Config;
+      |                                      ^~~~~~~~~~~~~~~
+../src/helloworld.c:296:33: warning: unused variable 'status_dac' [-Wunused-variable]
+  296 |         int status, status_adc, status_dac, i;
+      |                                 ^~~~~~~~~~
+../src/helloworld.c: In function 'SpiPsEepromPolledExample':
+../src/helloworld.c:402:13: warning: unused variable 'Page' [-Wunused-variable]
+  402 |         int Page;
+      |             ^~~~
+../src/helloworld.c:401:13: warning: unused variable 'Count' [-Wunused-variable]
+  401 |         int Count;
+      |             ^~~~~
+../src/helloworld.c:400:12: warning: unused variable 'UniqueValue' [-Wunused-variable]
+  400 |         u8 UniqueValue;
+      |            ^~~~~~~~~~~
+../src/helloworld.c:399:13: warning: unused variable 'BufferPtr' [-Wunused-variable]
+  399 |         u8 *BufferPtr;
+      |             ^~~~~~~~~
+'Finished building: ../src/helloworld.c'
+' '
+'Building target: test_lmk04828.elf'
+'Invoking: ARM v8 gcc linker'
+aarch64-none-elf-gcc -Wl,-T -Wl,../src/lscript.ld -LD:/Work/rfsoc_project/project3/app/test/export/test/sw/test/standalone_domain/bsplib/lib -o "test_lmk04828.elf"  ./src/helloworld.o ./src/platform.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-lgcc,-lc,-lmetal,--end-group
+'Finished building target: test_lmk04828.elf'
+' '
+'Invoking: ARM v8 Print Size'
+aarch64-none-elf-size test_lmk04828.elf  |tee "test_lmk04828.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 202353	   6840	  28047	 237240	  39eb8	test_lmk04828.elf
+'Finished building: test_lmk04828.elf.size'
+' '

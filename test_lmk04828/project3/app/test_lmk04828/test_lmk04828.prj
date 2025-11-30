@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="test_lmk04828" location="D:/Work/rfsoc_project/project3/app/test_lmk04828" platform="D:/Work/rfsoc_project/project3/app/test/export/test/test.xpfm" platformUID="xilinx:::0.0(custom)" systemProject="test_lmk04828_system" sysConfig="test" runtime="C/C++" cpu="standalone_domain" cpuInstance="psu_cortexa53_0" os="standalone" mssSignature="677f660654de285073aaa3e27fe7f06c">
+  <configuration name="Debug" id="xilinx.gnu.arm.a53.exe.debug.793282406">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+    <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <configuration name="Release" id="xilinx.gnu.arm.a53.exe.release.1337063793" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <template appTemplateName="hello_world"/>
+</sdkproject:SdkProject>

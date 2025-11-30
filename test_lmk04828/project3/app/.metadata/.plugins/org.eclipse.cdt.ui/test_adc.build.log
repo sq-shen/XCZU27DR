@@ -1,0 +1,21 @@
+10:56:44 **** Build of configuration Debug for project test_adc ****
+make all 
+'Building file: ../src/xrfdc_mts_example.c'
+'Invoking: ARM v8 gcc compiler'
+aarch64-none-elf-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xrfdc_mts_example.o" -D __BAREMETAL__ -ID:/Work/rfsoc_project/project_1/app/test/export/test/sw/test/standalone_domain/bspinclude/include -MMD -MP -MF"src/xrfdc_mts_example.d" -MT"src/xrfdc_mts_example.o" -o "src/xrfdc_mts_example.o" "../src/xrfdc_mts_example.c"
+'Finished building: ../src/xrfdc_mts_example.c'
+' '
+'Building target: test_adc.elf'
+'Invoking: ARM v8 gcc linker'
+aarch64-none-elf-gcc -Wl,-T -Wl,../src/lscript.ld -LD:/Work/rfsoc_project/project_1/app/test/export/test/sw/test/standalone_domain/bsplib/lib -o "test_adc.elf"  ./src/xrfdc_mts_example.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-lgcc,-lc,-lmetal,--end-group
+'Finished building target: test_adc.elf'
+' '
+'Invoking: ARM v8 Print Size'
+aarch64-none-elf-size test_adc.elf  |tee "test_adc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 193738	   6296	  27926	 227960	  37a78	test_adc.elf
+'Finished building: test_adc.elf.size'
+' '
+
+10:56:44 Build Finished (took 879ms)
+
