@@ -1,0 +1,70 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"1.64938",
+   "Default View_TopLeft":"558,-102",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:10.0 non-TLS
+#  -string -flagsOSRD
+preplace port GPIO -pg 1 -lvl 7 -x 2160 -y 610 -defaultsOSRD
+preplace port ddr_clk -pg 1 -lvl 0 -x -20 -y 40 -defaultsOSRD
+preplace port SPI_04828 -pg 1 -lvl 7 -x 2160 -y 20 -defaultsOSRD
+preplace port sys_clk -pg 1 -lvl 0 -x -20 -y 680 -defaultsOSRD
+preplace port sysref_in_0 -pg 1 -lvl 0 -x -20 -y 120 -defaultsOSRD
+preplace port adc1_clk_0 -pg 1 -lvl 0 -x -20 -y 60 -defaultsOSRD
+preplace port vin1_01_0 -pg 1 -lvl 0 -x -20 -y 100 -defaultsOSRD
+preplace port vout00_0 -pg 1 -lvl 7 -x 2160 -y 110 -defaultsOSRD
+preplace port dac0_clk_0 -pg 1 -lvl 0 -x -20 -y 80 -defaultsOSRD
+preplace port port-id_spi_04828_csn -pg 1 -lvl 7 -x 2160 -y 260 -defaultsOSRD
+preplace port port-id_spi_04828_clk -pg 1 -lvl 7 -x 2160 -y 280 -defaultsOSRD
+preplace portBus spi_04828_sdio -pg 1 -lvl 7 -x 2160 -y 240 -defaultsOSRD
+preplace inst zynq_ultra_ps_e_0 -pg 1 -lvl 1 -x 310 -y 350 -defaultsOSRD
+preplace inst axi_interconnect_0 -pg 1 -lvl 2 -x 820 -y 420 -defaultsOSRD
+preplace inst axi_gpio_0 -pg 1 -lvl 5 -x 1730 -y 610 -defaultsOSRD
+preplace inst proc_sys_reset_0 -pg 1 -lvl 1 -x 310 -y 790 -defaultsOSRD
+preplace inst util_ds_buf_0 -pg 1 -lvl 5 -x 1730 -y 230 -defaultsOSRD
+preplace inst axi_spi_master_0 -pg 1 -lvl 5 -x 1730 -y 450 -defaultsOSRD
+preplace inst clk_wiz_0 -pg 1 -lvl 1 -x 310 -y 190 -defaultsOSRD
+preplace inst ila_0 -pg 1 -lvl 3 -x 1160 -y 490 -defaultsOSRD
+preplace inst system_ila_0 -pg 1 -lvl 6 -x 2043 -y 380 -defaultsOSRD
+preplace inst usp_rf_data_converter_0 -pg 1 -lvl 3 -x 1160 -y 130 -defaultsOSRD
+preplace inst clk_wiz_1 -pg 1 -lvl 4 -x 1430 -y 770 -defaultsOSRD
+preplace inst ila_1 -pg 1 -lvl 5 -x 1730 -y 750 -defaultsOSRD
+preplace inst util_ds_buf_1 -pg 1 -lvl 3 -x 1160 -y 770 -defaultsOSRD
+preplace inst util_ds_buf_2 -pg 1 -lvl 2 -x 820 -y 680 -defaultsOSRD
+preplace inst xlconstant_0 -pg 1 -lvl 2 -x 820 -y 780 -defaultsOSRD
+preplace inst ila_2 -pg 1 -lvl 4 -x 1430 -y 60 -defaultsOSRD
+preplace inst dds_compiler_0 -pg 1 -lvl 1 -x 310 -y -110 -defaultsOSRD
+preplace netloc ARESETN_1 1 1 4 630 580 NJ 580 NJ 580 1550
+preplace netloc Net 1 5 2 NJ 240 NJ
+preplace netloc axi_spi_master_0_spi_clk 1 5 2 1910 280 NJ
+preplace netloc axi_spi_master_0_spi_csn 1 5 2 1890 260 NJ
+preplace netloc axi_spi_master_0_spi_mosi 1 4 2 1560 820 1920
+preplace netloc axi_spi_master_0_spi_sdio_t 1 4 2 1560 160 1880
+preplace netloc clk_wiz_0_clk_out1 1 0 6 0 0 640 140 990 350 NJ 350 1550 340 N
+preplace netloc clk_wiz_0_locked 1 1 2 650 200 1000
+preplace netloc clk_wiz_1_clk_out1 1 2 3 1010 -40 1310 -10 1530J
+preplace netloc clk_wiz_1_locked 1 2 3 1020 620 N 620 1540
+preplace netloc util_ds_buf_0_IOBUF_IO_O 1 4 2 1570 830 1900
+preplace netloc util_ds_buf_1_BUFGCE_O 1 3 1 NJ 770
+preplace netloc util_ds_buf_2_IBUF_OUT 1 2 1 990J 680n
+preplace netloc xlconstant_0_dout 1 2 1 NJ 780
+preplace netloc zynq_ultra_ps_e_0_pl_clk0 1 0 5 0 110 620 610 NJ 610 NJ 610 NJ
+preplace netloc zynq_ultra_ps_e_0_pl_resetn0 1 0 2 10 260 610
+preplace netloc adc1_clk_0_1 1 0 3 NJ 60 NJ 60 NJ
+preplace netloc axi_gpio_0_GPIO 1 5 2 NJ 610 NJ
+preplace netloc axi_interconnect_0_M00_AXI 1 2 3 980 410 NJ 410 1540J
+preplace netloc axi_interconnect_0_M01_AXI 1 2 3 NJ 420 NJ 420 N
+preplace netloc axi_interconnect_0_M02_AXI 1 2 1 970 20n
+preplace netloc dac0_clk_0_1 1 0 3 NJ 80 NJ 80 NJ
+preplace netloc dds_compiler_0_M_AXIS_DATA 1 1 2 N -120 990
+preplace netloc sys_clk_1 1 0 2 NJ 680 NJ
+preplace netloc sysref_in_0_1 1 0 3 NJ 120 NJ 120 NJ
+preplace netloc usp_rf_data_converter_0_m10_axis 1 3 1 1300 50n
+preplace netloc usp_rf_data_converter_0_vout00 1 3 4 1310J 130 1560J 110 NJ 110 NJ
+preplace netloc vin1_01_0_1 1 0 3 NJ 100 NJ 100 NJ
+preplace netloc zynq_ultra_ps_e_0_M_AXI_HPM0_LPD 1 1 1 N 320
+levelinfo -pg 1 -20 310 820 1160 1430 1730 2043 2160
+pagesize -pg 1 -db -bbox -sgen -150 -180 2340 930
+"
+}
+0

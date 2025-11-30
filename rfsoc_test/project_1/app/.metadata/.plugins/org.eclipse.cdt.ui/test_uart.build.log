@@ -1,0 +1,76 @@
+10:04:35 **** Incremental Build of configuration Debug for project test_uart ****
+make all 
+'Building file: ../src/axi_spi.c'
+'Invoking: ARM v8 gcc compiler'
+aarch64-none-elf-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/axi_spi.o" -D __BAREMETAL__ -ID:/Work/rfsoc_project/project_1/app/test/export/test/sw/test/standalone_domain/bspinclude/include -MMD -MP -MF"src/axi_spi.d" -MT"src/axi_spi.o" -o "src/axi_spi.o" "../src/axi_spi.c"
+../src/axi_spi.c: In function 'spi_rd_reg':
+../src/axi_spi.c:35:17: warning: implicit declaration of function 'delay' [-Wimplicit-function-declaration]
+   35 |                 delay();
+      |                 ^~~~~
+../src/axi_spi.c: At top level:
+../src/axi_spi.c:57:14: warning: conflicting types for 'delay'; have 'void()'
+   57 |         void delay(){
+      |              ^~~~~
+../src/axi_spi.c:35:17: note: previous implicit declaration of 'delay' with type 'void()'
+   35 |                 delay();
+      |                 ^~~~~
+'Finished building: ../src/axi_spi.c'
+' '
+'Building file: ../src/helloworld.c'
+'Invoking: ARM v8 gcc compiler'
+aarch64-none-elf-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/helloworld.o" -D __BAREMETAL__ -ID:/Work/rfsoc_project/project_1/app/test/export/test/sw/test/standalone_domain/bspinclude/include -MMD -MP -MF"src/helloworld.d" -MT"src/helloworld.o" -o "src/helloworld.o" "../src/helloworld.c"
+In file included from ../src/helloworld.c:53:
+../src/ps_gpio.h: In function 'gpio_init':
+../src/ps_gpio.h:28:13: warning: variable 'Type_of_board' set but not used [-Wunused-but-set-variable]
+   28 |         int Type_of_board;
+      |             ^~~~~~~~~~~~~
+../src/ps_gpio.h:26:13: warning: variable 'Status' set but not used [-Wunused-but-set-variable]
+   26 |         int Status;
+      |             ^~~~~~
+../src/helloworld.c: At top level:
+../src/helloworld.c:104: warning: "__BAREMETAL__" redefined
+  104 | #define __BAREMETAL__
+      | 
+<command-line>: note: this is the location of the previous definition
+../src/helloworld.c: In function 'main':
+../src/helloworld.c:168:9: warning: unused variable 'Status' [-Wunused-variable]
+  168 |     int Status;
+      |         ^~~~~~
+../src/helloworld.c:166:9: warning: unused variable 'spi_status' [-Wunused-variable]
+  166 |     int spi_status = 0;
+      |         ^~~~~~~~~~
+../src/helloworld.c: In function 'lmk04828_init':
+../src/helloworld.c:238:33: warning: unused variable 'size_dat' [-Wunused-variable]
+  238 |         int                     size_dat = ARRAY_SIZE(lmk04828_init_data_245p76);
+      |                                 ^~~~~~~~
+../src/helloworld.c:236:33: warning: unused variable 'rd_data' [-Wunused-variable]
+  236 |         u8                      rd_data          = 0;
+      |                                 ^~~~~~~
+../src/helloworld.c: In function 'RFdcMTS_Example':
+../src/helloworld.c:325:38: warning: unused variable 'DAC_Sync_Config' [-Wunused-variable]
+  325 |     XRFdc_MultiConverter_Sync_Config DAC_Sync_Config;
+      |                                      ^~~~~~~~~~~~~~~
+../src/helloworld.c:287:33: warning: unused variable 'status_dac' [-Wunused-variable]
+  287 |         int status, status_adc, status_dac, i;
+      |                                 ^~~~~~~~~~
+'Finished building: ../src/helloworld.c'
+' '
+'Building file: ../src/platform.c'
+'Invoking: ARM v8 gcc compiler'
+aarch64-none-elf-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/platform.o" -D __BAREMETAL__ -ID:/Work/rfsoc_project/project_1/app/test/export/test/sw/test/standalone_domain/bspinclude/include -MMD -MP -MF"src/platform.d" -MT"src/platform.o" -o "src/platform.o" "../src/platform.c"
+'Finished building: ../src/platform.c'
+' '
+'Building target: test_uart.elf'
+'Invoking: ARM v8 gcc linker'
+aarch64-none-elf-gcc -Wl,-T -Wl,../src/lscript.ld -LD:/Work/rfsoc_project/project_1/app/test/export/test/sw/test/standalone_domain/bsplib/lib -o "test_uart.elf"  ./src/axi_spi.o ./src/helloworld.o ./src/platform.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-lgcc,-lc,-lmetal,--end-group
+'Finished building target: test_uart.elf'
+' '
+'Invoking: ARM v8 Print Size'
+aarch64-none-elf-size test_uart.elf  |tee "test_uart.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 198210	   6824	  27982	 233016	  38e38	test_uart.elf
+'Finished building: test_uart.elf.size'
+' '
+
+10:04:37 Build Finished (took 1s.525ms)
+

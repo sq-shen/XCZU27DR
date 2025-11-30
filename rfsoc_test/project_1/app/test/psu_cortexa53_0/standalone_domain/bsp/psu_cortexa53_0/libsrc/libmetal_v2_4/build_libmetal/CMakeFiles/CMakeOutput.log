@@ -1,0 +1,16 @@
+The target system is: Generic -  - arm
+The host system is: Windows - 6.2 - AMD64
+Determining if files stdatomic.h exist passed with the following output:
+Change Dir: D:/Work/rfsoc_project/project_1/app/test/psu_cortexa53_0/standalone_domain/bsp/psu_cortexa53_0/libsrc/libmetal_v2_4/build_libmetal/CMakeFiles/CMakeTmp
+
+Run Build Command:"D:/Software/Vitis2022/Vitis/2022.2/gnuwin/bin/make.exe" "cmTC_98a35/fast"
+D:/Software/Vitis2022/Vitis/2022.2/gnuwin/bin/make.exe -f CMakeFiles/cmTC_98a35.dir/build.make CMakeFiles/cmTC_98a35.dir/build
+make.exe[1]: Entering directory 'D:/Work/rfsoc_project/project_1/app/test/psu_cortexa53_0/standalone_domain/bsp/psu_cortexa53_0/libsrc/libmetal_v2_4/build_libmetal/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_98a35.dir/CheckIncludeFiles.c.obj
+D:/Software/Vitis2022/Vitis/2022.2/gnu/aarch64/nt/aarch64-none/bin/aarch64-none-elf-gcc.exe   -O2 -c -g -Wall -Wextra -fno-tree-loop-distribute-patterns -ID:/Work/rfsoc_project/project_1/app/test/psu_cortexa53_0/standalone_domain/bsp/psu_cortexa53_0/include -c   -o CMakeFiles/cmTC_98a35.dir/CheckIncludeFiles.c.obj   -c D:/Work/rfsoc_project/project_1/app/test/psu_cortexa53_0/standalone_domain/bsp/psu_cortexa53_0/libsrc/libmetal_v2_4/build_libmetal/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+Linking C executable cmTC_98a35
+D:/Software/Vitis2022/Vitis/2022.2/gnu/aarch64/nt/aarch64-none/bin/aarch64-none-elf-gcc.exe  -O2 -c -g -Wall -Wextra -fno-tree-loop-distribute-patterns -ID:/Work/rfsoc_project/project_1/app/test/psu_cortexa53_0/standalone_domain/bsp/psu_cortexa53_0/include -c    "CMakeFiles/cmTC_98a35.dir/CheckIncludeFiles.c.obj"   -o cmTC_98a35  
+aarch64-xilinx-elf-gcc.exe: warning: CMakeFiles/cmTC_98a35.dir/CheckIncludeFiles.c.obj: linker input file unused because linking not done
+make.exe[1]: Leaving directory 'D:/Work/rfsoc_project/project_1/app/test/psu_cortexa53_0/standalone_domain/bsp/psu_cortexa53_0/libsrc/libmetal_v2_4/build_libmetal/CMakeFiles/CMakeTmp'
+
+
